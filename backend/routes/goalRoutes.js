@@ -1,16 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const {getGoals} = require('../controllers/goalController')
-const {setGoal} = require('../controllers/goalController')
-const {putGoal} = require('../controllers/goalController')
-const {deleteGoal} = require('../controllers/goalController')
+const {
+  getGoals, 
+  setGoal, 
+  updateGoal, 
+  deleteGoal,
+} = require('../controllers/goalController')
 
-router.get('/', getGoals)
+// These two lines are the same as the 4 lines below
+router.route('/').get(getGoals).post(setGoal)
+router.route('/:id').put(updateGoal).delete(deleteGoal)
 
-router.post('/', setGoal)
-
-router.put('/:id', putGoal)
-
-router.delete('/:id', deleteGoal)
+// router.get('/', getGoals)
+// router.post('/', setGoal)
+// router.put('/:id', updateGoal)
+// router.delete('/:id', deleteGoal)
 
 module.exports = router
